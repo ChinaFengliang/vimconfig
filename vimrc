@@ -167,7 +167,7 @@ set number
 set showcmd
 
 " Height of the command bar
-set cmdheight=2
+set cmdheight=1
 
 " Highlight the cursor line
 set cursorline
@@ -564,7 +564,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 
 " Toggle tag list on and off
-nmap <Leader>tl :TlistToggle<CR>
+nnoremap <F8> :TlistToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
