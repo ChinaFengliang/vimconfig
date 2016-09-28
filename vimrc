@@ -30,7 +30,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/syntastic'
 Plugin 'rdnetto/YCM-Generator'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'vim-airline/vim-airline'
@@ -49,6 +49,8 @@ Plugin 'cespare/vim-toml'
 Plugin 'elzr/vim-json'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'fholgado/minibufexpl.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -485,6 +487,7 @@ map N <Plug>(easymotion-prev)
 " :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
 nmap <Leader>n :NERDTree<Space>
 nmap <Leader>nt :NERDTreeToggle<CR>
+nnoremap <F5> :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 
@@ -831,3 +834,13 @@ map <Leader>md :InstantMarkdownPreview<CR>
 " Python mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TODO
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" miniBufExpl settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+map <C-b> :bprev!<CR>                "设置向后切换的快捷键"
+map <C-n> :bnext!<CR>                "设置向前切换的快捷键"

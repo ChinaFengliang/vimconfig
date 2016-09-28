@@ -11,9 +11,10 @@ $ sudo apt-get install vim
 ```bash
 $ cd
 $ rm -rf .vim .vimrc
-$ git clone https://github.com/jarsonfang/vimconfig.git
-$ ln -s vimconfig/vim .vim
-$ ln -s vimconfig/vimrc .vimrc
+$ mkdir -p etc
+$ git clone https://github.com/ChinaFengliang/vimconfig.git etc/vim
+$ ln -s vim/vim .vim
+$ ln -s vim/vimrc .vimrc
 ```
 
 ## Install Vundle plugin manager
