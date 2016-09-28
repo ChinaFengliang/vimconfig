@@ -1,4 +1,4 @@
 *.pyc
 *.swp
-vim/bundle
-vim/sessions
+plugin/bundle
+plugin/sessions

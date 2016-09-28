@@ -13,8 +13,8 @@ $ cd
 $ rm -rf .vim .vimrc
 $ mkdir -p etc
 $ git clone https://github.com/ChinaFengliang/vimconfig.git etc/vim
-$ ln -s vim/vim .vim
-$ ln -s vim/vimrc .vimrc
+$ ln -s etc/vim/plugin .vim
+$ ln -s etc/vim/vimrc .vimrc
 ```
 
 ## Install Vundle plugin manager
