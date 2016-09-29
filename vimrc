@@ -49,6 +49,7 @@ Plugin 'cespare/vim-toml'
 Plugin 'elzr/vim-json'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'fholgado/minibufexpl.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -109,8 +110,8 @@ endif
 
 " With a map leader it's possible to do extra key combinations
 " like <Leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = ";"
+let g:mapleader = ";"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Syntax and colorscheme
@@ -165,7 +166,7 @@ set number
 set showcmd
 
 " Height of the command bar
-set cmdheight=2
+"set cmdheight=2
 
 " Highlight the cursor line
 set cursorline
@@ -190,7 +191,7 @@ set softtabstop=4
 
 " Linebreak on 500 characters
 set lbr
-set tw=500
+"set tw=500
 set wrap "Wrap lines
 
 " Show tabs and trails
@@ -220,7 +221,7 @@ augroup vimrcEx
 au!
 
 " For all text files set 'textwidth' to 78 characters.
-autocmd FileType text setlocal textwidth=78
+"autocmd FileType text setlocal textwidth=78
 
 " For all text files load abbreviation settings
 autocmd Filetype text source ~/.vim/scripts/abbrevs.vim
@@ -269,6 +270,9 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>b :bp<CR>
+
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
@@ -290,7 +294,7 @@ nmap <Leader>te :tabedit <c-r>=expand("%:p:h")<CR>/
 nmap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Edit file
-nmap <Leader>e :edit<Space>
+"nmap <Leader>e :edit<Space>
 
 " Save file
 nmap <Leader>w :w!<CR>
@@ -386,6 +390,80 @@ nmap <Leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
 "nmap <Leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
 " 8 or i: Find files #including this file
 nmap <Leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+
+map <F12> :call Do_CsTag()<CR>
+nmap <Leader>css :cs find s <C-R>=expand("<cword>")<CR><CR>:bo cw<CR>
+nmap <Leader>csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <Leader>csc :cs find c <C-R>=expand("<cword>")<CR><CR>:bo cw<CR>
+nmap <Leader>cst :cs find t <C-R>=expand("<cword>")<CR><CR>:cw<CR>
+"nmap <Leader>cst :cs find t <C-R>=expand("<cword>")<CR><CR>:bo cw<CR>
+nmap <Leader>cse :cs find e <C-R>=expand("<cword>")<CR><CR>:bo cw<CR>
+nmap <Leader>csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <Leader>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:bo cw<CR>
+nmap <Leader>csd :cs find d <C-R>=expand("<cword>")<CR><CR>:bo cw<CR>
+
+if (has("win32") || has("win95") || has("win64") || has("win16"))
+    let g:iswindows=1
+else
+    let g:iswindows=0
+endif
+
+function Do_CsTag()
+    let dir = getcwd()
+    if filereadable("tags")
+        if(g:iswindows==1)
+            let tagsdeleted=delete(dir."\\"."tags")
+        else
+            let tagsdeleted=delete("./"."tags")
+        endif
+        if(tagsdeleted!=0)
+            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+            return
+        endif
+    endif
+    if has("cscope")
+        silent! execute "cs kill 0
+    endif
+    if filereadable("cscope.files")
+        if(g:iswindows==1)
+            let csfilesdeleted=delete(dir."\\"."cscope.files")
+        else
+            let csfilesdeleted=delete("./"."cscope.files")
+        endif
+        if(csfilesdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
+            return
+        endif
+    endif
+    if filereadable("cscope.out")
+        if(g:iswindows==1)
+            let csoutdeleted=delete(dir."\\"."cscope.out")
+        else
+            let csoutdeleted=delete("./"."cscope.out")
+        endif
+        if(csoutdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
+            return
+        endif
+    endif
+    if(executable('ctags'))
+        "silent! execute "!ctags -R ¨Cc-types=+p ¨Cfields=+S *"
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+        "silent! execute "!ctags -R "Cc++-kinds=+p "Cfields=+iaS "Cextra=+q ."
+    endif
+    if(executable('cscope') && has("cscope") )
+        if(g:iswindows!=1)
+            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+        else
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+        endif
+        silent! execute "!cscope -b"
+        execute "normal :"
+        if filereadable("cscope.out")
+            execute "cs add cscope.out"
+        endif
+    endif
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickfix
@@ -483,17 +561,18 @@ map N <Plug>(easymotion-prev)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Global commands
 " :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
-nmap <Leader>n :NERDTree<Space>
+"nmap <Leader>n :NERDTree<Space>
 nmap <Leader>nt :NERDTreeToggle<CR>
+nmap <Leader>e :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 
 " Bookmark commands
 " Note that the following commands are only available in the NERD tree buffer.
 " :Bookmark [<name>], bookmark the current node as <name>, help :Bookmark to see more detail
-nmap <Leader>b :Bookmark<Space>
+"nmap <Leader>b :Bookmark<Space>
 " :ClearBookmarks [<bookmarks>], Remove all the given bookmarks. If no bookmarks are given then remove all bookmarks on the current node.
-nmap <Leader>bc :ClearBookmarks<Space>
+"nmap <Leader>bc :ClearBookmarks<Space>
 
 " Mappings
 " I.......Toggle whether hidden files displayed....................|NERDTree-I|
@@ -561,7 +640,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 
 " Toggle tag list on and off
-nmap <Leader>tl :TlistToggle<CR>
+nmap <Leader>l :TlistToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
@@ -572,7 +651,7 @@ nmap <Leader>tb :TagbarToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Task list
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>td <Plug>TaskList
+"nmap <Leader>t <Plug>TaskList
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SuperTab
@@ -816,6 +895,14 @@ let g:instant_markdown_autostart = 0
 " manually trigger preview via the command :InstantMarkdownPreview.
 " the command is only available inside markdown buffers and when the autostart option is turned off.
 map <Leader>md :InstantMarkdownPreview<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" miniBufExpl settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:miniBufExplMapWindowNavVim =1
+let g:miniBufExplMapWindowNavArrows =1   
+let g:miniBufExplMapCTabSwitchBufs =1   
+let g:miniBufExplModSelTarget =1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-json
