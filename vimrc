@@ -113,6 +113,9 @@ endif
 let mapleader = ";"
 let g:mapleader = ";"
 
+" No Menubar
+set go=
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Syntax and colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -900,8 +903,8 @@ map <Leader>md :InstantMarkdownPreview<CR>
 " miniBufExpl settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:miniBufExplMapWindowNavVim =1
-let g:miniBufExplMapWindowNavArrows =1   
-let g:miniBufExplMapCTabSwitchBufs =1   
+let g:miniBufExplMapWindowNavArrows =1
+let g:miniBufExplMapCTabSwitchBufs =1
 let g:miniBufExplModSelTarget =1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -918,3 +921,8 @@ let g:miniBufExplModSelTarget =1
 " Python mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TODO
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-test
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <Leader>d <C-]>
