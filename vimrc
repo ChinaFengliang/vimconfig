@@ -314,6 +314,10 @@ nmap <Leader>vs :vsplit<CR>
 " Toggle paste mode on and off
 nmap <Leader>p :setlocal paste!<CR>
 
+" open quickfix window
+map <F6> :bo cw<CR>
+map <C-c> :cclose<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast edit vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
