@@ -15,13 +15,19 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ShowMarks'
+
+" To open the browser, use the :MarksBrowser command
+" The select the a mark to jump to, use <CR> or <2-LeftMouse>
+" To delete a mark, press d
 Plugin 'Marks-Browser'
+
 Plugin 'tomasr/molokai'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mhinz/vim-grepper'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/fencview.vim'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/TaskList.vim'
 Plugin 'vim-scripts/sessionman.vim'
