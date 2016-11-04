@@ -134,7 +134,7 @@ endif
 
 if &t_Co > 2 || has("gui_running")
   syntax enable
-"  set hlsearch
+  set hlsearch
 endif
 
 if has('gui_running')
