@@ -104,9 +104,9 @@ set incsearch
 set hidden
 
 " In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
+"if has('mouse')
+"  set mouse=a
+"endif
 
 " With a map leader it's possible to do extra key combinations
 " like <Leader>w saves the current file
