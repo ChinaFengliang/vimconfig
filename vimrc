@@ -11,44 +11,165 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+:let enable_showmark = 0
+:let enable_marks_browser = 0
+:let enable_molokai = 1
+:let enable_ctrlp = 0
+:let enable_taglist = 1
+:let enable_nerdtree = 1
+:let enable_vim_grepper = 1
+:let enable_tagbar = 1
+:let enable_tasklist = 0
+:let enable_sessionman = 0
+:let enable_supertab = 1
+:let enable_ultisnips = 0
+:let enable_vim_snippets = 0
+:let enable_syntastic = 0
+:let enable_ycm = 1
+:let enable_vim_easymotion = 1
+:let enable_indent_line = 1
+:let enable_python_mode = 0
+:let enable_tabular = 0
+:let enable_vim_repeat = 0
+:let enable_vim_surround = 0
+:let enable_vim_fugitive = 1
+:let enable_vim_gitgutter = 0
+:let enable_vim_virtualenv = 0
+:let enable_rust = 0
+:let enable_vim_toml = 0
+:let enable_vim_json = 0
+:let enable_vim_markdown = 0
+:let enable_vim_instant_markdown = 0
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'ShowMarks'
-Plugin 'Marks-Browser'
-Plugin 'tomasr/molokai'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mhinz/vim-grepper'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
+:if enable_showmark
+	Plugin 'ShowMarks'
+:endif
+
+:if enable_marks_browser
+	Plugin 'Marks-Browser'
+:endif
+
+:if enable_molokai
+	Plugin 'tomasr/molokai'
+:endif
+
+:if enable_ctrlp
+	Plugin 'kien/ctrlp.vim'
+:endif
+
+:if enable_vim_grepper
+	Plugin 'mhinz/vim-grepper'
+:endif
+
+:if enable_nerdtree
+	Plugin 'scrooloose/nerdtree'
+:endif
+
+:if enable_tagbar
+	Plugin 'majutsushi/tagbar'
+:endif
+
 Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/TaskList.vim'
-Plugin 'vim-scripts/sessionman.vim'
-Plugin 'ervandew/supertab'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/syntastic'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'easymotion/vim-easymotion'
+:if enable_taglist
+	Plugin 'vim-scripts/taglist.vim'
+:endif
+
+:if enable_tasklist
+	Plugin 'vim-scripts/TaskList.vim'
+:endif
+
+:if enable_sessionman
+	Plugin 'vim-scripts/sessionman.vim'
+:endif
+
+:if enable_supertab
+	Plugin 'ervandew/supertab'
+:endif
+
+:if enable_ultisnips
+	Plugin 'SirVer/ultisnips'
+:endif
+
+:if enable_vim_snippets
+	Plugin 'honza/vim-snippets'
+:endif
+
+:if enable_syntastic
+	Plugin 'scrooloose/syntastic'
+:endif
+
+:if enable_ycm
+	Plugin 'rdnetto/YCM-Generator'
+	Plugin 'Valloric/YouCompleteMe'
+:endif
+
+:if enable_vim_easymotion
+	Plugin 'easymotion/vim-easymotion'
+:endif
+
+Plugin 'jiangmiao/auto-pairs'
+
+:if enable_indent_line
+	Plugin 'Yggdroot/indentLine'
+:endif
+
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bronson/vim-trailing-whitespace'
+
+:if enable_python_mode
 Plugin 'klen/python-mode'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'rust-lang/rust.vim'
-Plugin 'cespare/vim-toml'
-Plugin 'elzr/vim-json'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
+:endif
+
+:if enable_tabular
+	Plugin 'godlygeek/tabular'
+:endif
+
+:if enable_vim_repeat
+	Plugin 'tpope/vim-repeat'
+:endif
+
+:if enable_vim_surround
+	Plugin 'tpope/vim-surround'
+:endif
+
+:if enable_vim_fugitive
+	Plugin 'tpope/vim-fugitive'
+:endif
+
+:if enable_vim_gitgutter
+	Plugin 'airblade/vim-gitgutter'
+:endif
+
+:if enable_vim_virtualenv
+	Plugin 'jmcantrell/vim-virtualenv'
+:endif
+
+:if enable_rust
+	Plugin 'rust-lang/rust.vim'
+:endif
+
+:if enable_vim_toml
+	Plugin 'cespare/vim-toml'
+:endif
+
+:if enable_vim_json
+	Plugin 'elzr/vim-json'
+:endif
+
+:if enable_vim_markdown
+	Plugin 'plasticboy/vim-markdown'
+:endif
+
+:if enable_vim_instant_markdown
+	Plugin 'suan/vim-instant-markdown'
+:endif
+
 Plugin 'fholgado/minibufexpl.vim'
 
 " All of your Plugins must be added before the following line
@@ -108,6 +229,9 @@ set hidden
 "  set mouse=a
 "endif
 
+" Option settings for diff mode
+set diffopt=vertical,context:3
+
 " With a map leader it's possible to do extra key combinations
 " like <Leader>w saves the current file
 let mapleader = ";"
@@ -136,6 +260,8 @@ if &t_Co > 2 || has("gui_running")
   syntax enable
   set hlsearch
 endif
+
+set conceallevel=2
 
 if has('gui_running')
     set background=light
@@ -415,7 +541,7 @@ else
     let g:iswindows=0
 endif
 
-function Do_CsTag()
+function! Do_CsTag()
     let dir = getcwd()
     if filereadable("tags")
         if(g:iswindows==1)
@@ -505,74 +631,92 @@ nmap <Leader>at :AT<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Showmarks
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable ShowMarks
-let showmarks_enable = 1
+:if enable_showmark
+	" Enable ShowMarks
+	let showmarks_enable = 1
 
-" Show which marks
-let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	" Show which marks
+	let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-" Ignore help, quickfix, non-modifiable buffers
-let showmarks_ignore_type = "hqm"
+	" Ignore help, quickfix, non-modifiable buffers
+	let showmarks_ignore_type = "hqm"
 
-" Hilight lower & upper marks
-let showmarks_hlline_lower = 1
-let showmarks_hlline_upper = 1
+	" Hilight lower & upper marks
+	let showmarks_hlline_lower = 1
+	let showmarks_hlline_upper = 1
 
-"The following mappings are setup by default:
-"  <Leader>mt   - Toggles ShowMarks on and off.
-"  <Leader>ma   - Clears all marks in the current buffer.
-"  <Leader>mm   - Places the next available mark on the current lineo
-nmap <Leader>mc :ShowMarksClearMark<CR>
+	"The following mappings are setup by default:
+	"  <Leader>mt   - Toggles ShowMarks on and off.
+	"  <Leader>ma   - Clears all marks in the current buffer.
+	"  <Leader>mm   - Places the next available mark on the current lineo
+	nmap <Leader>mc :ShowMarksClearMark<CR>
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Markbrowser
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>mb :MarksBrowser<CR>
+:if enable_marks_browser
+	nmap <Leader>mb :MarksBrowser<CR>
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
+:if enable_vim_easymotion
+	let g:EasyMotion_do_mapping = 0 " Disable default mappings
+	let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
 
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+	" JK motions: Line motions
+	map <Leader>j <Plug>(easymotion-j)
+	map <Leader>k <Plug>(easymotion-k)
 
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-"nmap s <Plug>(easymotion-overwin-f2)
+	" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+	" `s{char}{label}`
+	nmap s <Plug>(easymotion-overwin-f)
+	" or
+	" `s{char}{char}{label}`
+	" Need one more keystroke, but on average, it may be more comfortable.
+	"nmap s <Plug>(easymotion-overwin-f2)
 
-" Jump to anywhere till before {char}
-" `t{char}{label}`
-map t <Plug>(easymotion-bd-t)
-" or {char}{char}
-" `t{char}{char}{label}`
-"map t <Plug>(easymotion-bd-t2)
+	" Jump to anywhere till before {char}
+	" `t{char}{label}`
+	map t <Plug>(easymotion-bd-t)
+	" or {char}{char}
+	" `t{char}{char}{label}`
+	"map t <Plug>(easymotion-bd-t2)
 
-" n-character search motion
-map / <Plug>(easymotion-sn)
+	" n-character search motion
+	map / <Plug>(easymotion-sn)
 
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map n <Plug>(easymotion-next)
-map N <Plug>(easymotion-prev)
+	" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+	" Without these mappings, `n` & `N` works fine. (These mappings just provide
+	" different highlight method and have some other features )
+	"map n <Plug>(easymotion-next)
+	"map N <Plug>(easymotion-prev)
+:endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" indentLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:if enable_indent_line
+	let g:indentLine_concealcursor = ''
+	let g:indentLine_leadingSpaceChar = '·'
+	"let g:indentLine_leadingSpaceEnabled = 1
+	"let g:indentLine_fileType = ['python']
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Global commands
-" :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
-"nmap <Leader>n :NERDTree<Space>
-nmap <Leader>nt :NERDTreeToggle<CR>
-nmap <Leader>e :NERDTreeToggle<CR>
-let NERDTreeHighlightCursorline=1
-let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+:if enable_nerdtree
+	" Global commands
+	" :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
+	"nmap <Leader>n :NERDTree<Space>
+	nmap <Leader>nt :NERDTreeToggle<CR>
+	nmap <Leader>e :NERDTreeToggle<CR>
+	let NERDTreeHighlightCursorline=1
+	let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+:endif
 
 " Bookmark commands
 " Note that the following commands are only available in the NERD tree buffer.
@@ -590,133 +734,185 @@ let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.eg
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CtrlP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" :CtrlP Open CtrlP in file mode
-" :CtrlPBuffer Open CtrlP in find buffer mode
-" :CtrlPMRU Open CtrlP in find Most-Recently-Used file mode
+:if enable_ctrlp
+	" :CtrlP Open CtrlP in file mode
+	" :CtrlPBuffer Open CtrlP in find buffer mode
+	" :CtrlPMRU Open CtrlP in find Most-Recently-Used file mode
 
-let g:ctrlp_map = '<Leader>ff' " the mapping to invoke CtrlP in Normal mode, default is '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP' " the default opening command to use when pressing the above mapping
+	let g:ctrlp_map = '<Leader>ff' " the mapping to invoke CtrlP in Normal mode, default is '<C-P>'
+	"let g:ctrlp_cmd = 'CtrlP' " the default opening command to use when pressing the above mapping
 
-nmap <Leader>fb :CtrlPBuffer<CR>
-nmap <Leader>fr :CtrlPMRU<CR>
+	nmap <Leader>fb :CtrlPBuffer<CR>
+	nmap <Leader>fr :CtrlPMRU<CR>
 
-let g:ctrlp_arg_map = 1
-let g:ctrlp_open_new_file = 't'
+	let g:ctrlp_regexp = 1
+	let g:ctrlp_arg_map = 1
 
-let g:ctrlp_regexp = 1
-let g:ctrlp_by_filename = 1
+	let g:ctrlp_user_command =
+	  \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
-let g:ctrlp_user_command =
-  \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+	set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
+	let g:ctrlp_custom_ignore = {
+	  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	  \ 'file': '\v\.(exe|so|dll)$',
+	  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+	  \ }
 
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-  \ }
-
-" mappings inside CtrlP's prompt,
-" see :help ctrlp_prompt_mappings
+	" mappings inside CtrlP's prompt, see :help ctrlp_prompt_mappings
+	let g:ctrlp_prompt_mappings = {
+	  \ 'PrtBS()':              ['<bs>'],
+	  \ 'PrtDelete()':          ['<del>'],
+	  \ 'PrtDeleteWord()':      ['<c-w>'],
+	  \ 'PrtClear()':           ['<c-u>'],
+	  \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+	  \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
+	  \ 'PrtSelectMove("t")':   ['<Home>'],
+	  \ 'PrtSelectMove("b")':   ['<End>'],
+	  \ 'PrtSelectMove("u")':   ['<PageUp>'],
+	  \ 'PrtSelectMove("d")':   ['<PageDown>'],
+	  \ 'PrtHistory(-1)':       ['<c-n>'],
+	  \ 'PrtHistory(1)':        ['<c-p>'],
+	  \ 'AcceptSelection("e")': ['<cr>'],
+	  \ 'AcceptSelection("h")': ['<c-x>'],
+	  \ 'AcceptSelection("t")': ['<c-t>'],
+	  \ 'AcceptSelection("v")': ['<c-v>'],
+	  \ 'ToggleFocus()':        ['<s-tab>'],
+	  \ 'ToggleRegex()':        ['<c-r>'],
+	  \ 'ToggleByFname()':      ['<c-d>'],
+	  \ 'ToggleType(1)':        ['<c-f>'],
+	  \ 'ToggleType(-1)':        ['<c-b>'],
+	  \ 'PrtCurStart()':        ['<c-a>'],
+	  \ 'PrtCurEnd()':          ['<c-e>'],
+	  \ 'PrtCurLeft()':         ['<left>'],
+	  \ 'PrtCurRight()':        ['<right>'],
+	  \ 'PrtClearCache()':      ['<F5>'],
+	  \ 'CreateNewFile()':      ['<c-y>'],
+	  \ 'MarkToOpen()':         ['<c-z>'],
+	  \ 'OpenMulti()':          ['<c-o>'],
+	  \ 'PrtExit()':            ['<esc>'],
+	  \ }
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Grepper
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" for browsing the input history
-cnoremap <c-n> <down>
-cnoremap <c-p> <up>
+:if enable_vim_grepper
+	" for browsing the input history
+	cnoremap <c-n> <down>
+	cnoremap <c-p> <up>
 
-nnoremap <Leader>g :Grepper -tool git -cword<cr>
-nnoremap <Leader>G :Grepper -tool ag -cword<cr>
-" see https://github.com/ggreer/the_silver_searcher for more about ag
+	nnoremap <Leader>g :Grepper -tool git -cword<cr>
+	nnoremap <Leader>G :Grepper -tool ag -cword<cr>
+	" see https://github.com/ggreer/the_silver_searcher for more about ag
 
-let g:grepper = {
-    \ 'tools': ['ag', 'git', 'grep'],
-    \ 'next_tool': '<Leader>g',
-    \ }
+	let g:grepper = {
+		\ 'tools': ['ag', 'git', 'grep'],
+		\ 'next_tool': '<Leader>g',
+		\ }
 
-let g:grepper.git =
-  \ { 'grepprg': 'git -C `git rev-parse --show-toplevel` grep -nI' }
+	let g:grepper.git =
+	  \ { 'grepprg': 'git -C `git rev-parse --show-toplevel` grep -nI' }
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Taglist
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+:if enable_taglist
+	let Tlist_Show_One_File = 1
+	let Tlist_Exit_OnlyWindow = 1
+	let Tlist_Use_Right_Window = 1
+	let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 
-" Toggle tag list on and off
-nmap <Leader>l :TlistToggle<CR>
+	" Toggle tag list on and off
+	nmap <Leader>l :TlistToggle<CR>
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:tagbar_autofocus = 1
-nmap <Leader>tb :TagbarToggle<CR>
+:if enable_tagbar
+	let g:tagbar_sort = 0
+	let g:tagbar_autofocus = 1
+	nmap <Leader>tb :TagbarToggle<CR>
+	nmap <Leader>tl :TagbarToggle<CR>
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Task list
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"nmap <Leader>t <Plug>TaskList
+:if enable_tasklist
+	nmap <Leader>td <Plug>TaskList
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SuperTab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabDefaultCompletionType = '<C-TAB>'
+:if enable_supertab
+	let g:SuperTabDefaultCompletionType = '<C-TAB>'
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set completeopt=longest,menu
+:if enable_ycm
+	set completeopt=longest,menu
 
-let g:ycm_python_binary_path = 'python'
-let g:ycm_rust_src_path = '/usr/local/src/rust/src'
+	let g:ycm_python_binary_path = 'python'
+	let g:ycm_rust_src_path = '/usr/local/src/rust/src'
 
-"let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-"let g:ycm_key_invoke_completion = '<C-Space>' " Default
-"let g:ycm_key_detailed_diagnostics = '<Leader>d' " Default
-let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
+	"let g:ycm_complete_in_comments = 1
+	let g:ycm_collect_identifiers_from_tags_files = 1
+	"let g:ycm_key_invoke_completion = '<C-Space>' " Default
+	"let g:ycm_key_detailed_diagnostics = '<Leader>d' " Default
+	let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+	let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
 
-let g:ycm_confirm_extra_conf=0
-let g:ycm_global_ycm_extra_conf = '~/.vim/scripts/.ycm_extra_conf.py'
+	let g:ycm_confirm_extra_conf=0
+	let g:ycm_global_ycm_extra_conf = '~/.vim/scripts/.ycm_extra_conf.py'
 
-nnoremap <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <Leader>gi :YcmCompleter GoToInclude<CR>
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+	nnoremap <Leader>gt :YcmCompleter GoTo<CR>
+	nnoremap <Leader>gd :YcmCompleter GetDoc<CR>
+	nnoremap <Leader>gi :YcmCompleter GoToInclude<CR>
+	nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
+	inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ultisnips
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger       = '<TAB>'
-let g:UltiSnipsJumpForwardTrigger  = '<TAB>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
-let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "~/.vim/bundle/vim-snippets/UltiSnips"]
+:if enable_ultisnips
+	let g:UltiSnipsExpandTrigger       = '<TAB>'
+	let g:UltiSnipsJumpForwardTrigger  = '<TAB>'
+	let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+	let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "~/.vim/bundle/vim-snippets/UltiSnips"]
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_error_symbol = '✗>'
-let g:syntastic_warning_symbol = '*>'
-let g:syntastic_python_checkers=['pyflakes']
+:if enable_syntastic
+	let g:syntastic_error_symbol = '✗>'
+	let g:syntastic_warning_symbol = '*>'
+	let g:syntastic_python_checkers=['pyflakes']
 
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_remove_include_errors = 1
-let g:syntastic_cpp_include_dirs = ['/usr/include/']
-let g:syntastic_enable_balloons = 1 "whether to show balloons
+	let g:syntastic_cpp_compiler = 'clang++'
+	let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+	let g:syntastic_cpp_check_header = 1
+	let g:syntastic_cpp_remove_include_errors = 1
+	let g:syntastic_cpp_include_dirs = ['/usr/include/']
+	let g:syntastic_enable_balloons = 1 "whether to show balloons
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sessionman
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>sl :SessionList<CR>
-nmap <Leader>ss :SessionSave<CR>
-nmap <Leader>sc :SessionClose<CR>
+:if enable_sessionman
+	nmap <Leader>sl :SessionList<CR>
+	nmap <Leader>ss :SessionSave<CR>
+	nmap <Leader>sc :SessionClose<CR>
 
-set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
+	set sessionoptions=blank,buffers,sesdir,folds,tabpages,winsize
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Trailing whitespace
@@ -742,16 +938,67 @@ map <Leader><space> :FixWhitespace<CR>
 " see :help surround for more
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-fugitive
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"COMMANDS                                        *fugitive-commands*
+
+"These commands are local to the buffers in which they work (generally, buffers
+"that are part of Git repositories).
+"                                                *fugitive-:Git*
+":Git [args]             Run an arbitrary git command. Similar to :!git [args]
+"                        but chdir to the repository tree first.
+"                                                *fugitive-:Gstatus*
+":Gstatus                Bring up the output of git-status in the preview
+"                        window.  The following maps, which work on the cursor
+"                        line file where sensible, are provided:
+"
+"                        g?    show this help
+"                        q     close status
+"                        ...
+"                                                *fugitive-:Gblame*
+":Gblame [flags]         Run git-blame on the file and open the results in a
+"                        scroll bound vertical split.  You can give any of
+"                        ltfnsewMC as flags and they will be passed along to
+"                        git-blame.  The following maps, which work on the
+"                        cursor line commit where sensible, are provided:
+"
+"                        g?    show this help
+"                        q     close blame and return to blamed window
+"                        ...
+"                                                *fugitive-:Gdiff*
+":Gdiff [revision]       Perform a |vimdiff| against the current file in the
+"                        given revision.  With no argument, the version in the
+"                        index is used (which means a three-way diff during a
+"                        merge conflict, making it a git-mergetool
+"                        alternative).  The newer of the two files is placed
+"                        to the right or bottom, depending on 'diffopt' and
+"                        the width of the window relative to 'textwidth'.  Use
+"                        |do| and |dp| and write to the index file to simulate
+"                        'git add --patch'.
+"
+"use ':help fugitive' to see more detail of commands
+
+nmap <Leader>gx :Gdiff<CR>
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gb :Gblame<CR>
+nmap <Leader>gc :Gcommit<CR>
+
+" Auto-clean fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabular for aligning text
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+:if enable_tabular
+	nmap <Leader>a= :Tabularize /=<CR>
+	vmap <Leader>a= :Tabularize /=<CR>
+	nmap <Leader>a: :Tabularize /:<CR>
+	vmap <Leader>a: :Tabularize /:<CR>
+	nmap <Leader>a:: :Tabularize /:\zs<CR>
+	vmap <Leader>a:: :Tabularize /:\zs<CR>
+	nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+	vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-gitgutter
@@ -854,54 +1101,59 @@ let g:tmuxline_preset = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rust
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:rust_fold = 1
-"let g:rustfmt_autosave = 1
-nmap <Leader>r :RustRun<CR>
+:if enable_rust
+	let g:rust_fold = 1
+	"let g:rustfmt_autosave = 1
+	nmap <Leader>r :RustRun<CR>
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set conceallevel=2
-"let g:vim_markdown_conceal = 0
+:if enable_vim_markdown
+	"let g:vim_markdown_conceal = 0
 
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_folding_level = 6
+	let g:vim_markdown_folding_disabled = 1
+	let g:vim_markdown_folding_level = 6
 
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_new_list_item_indent = 2
+	let g:vim_markdown_toc_autofit = 1
+	let g:vim_markdown_new_list_item_indent = 2
 
-let g:vim_markdown_math = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
+	let g:vim_markdown_math = 1
+	let g:vim_markdown_frontmatter = 1
+	let g:vim_markdown_toml_frontmatter = 1
+	let g:vim_markdown_json_frontmatter = 1
 
-"let g:vim_markdown_emphasis_multiline = 0
-"let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+	"let g:vim_markdown_emphasis_multiline = 0
+	"let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
 
-" Mappings
-" - 'gx': open the link under the cursor in browser. '<Plug>Markdown_OpenUrlUnderCursor'
-" - 'ge': open the link under the cursor in Vim for editing. Useful for
-"   relative markdown links. '<Plug>Markdown_EditUrlUnderCursor'
-" - ']]': go to next header. '<Plug>Markdown_MoveToNextHeader'
-" - '[[': go to previous header. '<Plug>Markdown_MoveToPreviousHeader'
-" - '][': go to next sibling header if any. '<Plug>Markdown_MoveToNextSiblingHeader'
-" - '[]': go to previous sibling header if any. '<Plug>Markdown_MoveToPreviousSiblingHeader'
-" - ']c': go to Current header. '<Plug>Markdown_MoveToCurHeader'
-" - ']u': go to parent header (Up). '<Plug>Markdown_MoveToParentHeader'
+	" Mappings
+	" - 'gx': open the link under the cursor in browser. '<Plug>Markdown_OpenUrlUnderCursor'
+	" - 'ge': open the link under the cursor in Vim for editing. Useful for
+	"   relative markdown links. '<Plug>Markdown_EditUrlUnderCursor'
+	" - ']]': go to next header. '<Plug>Markdown_MoveToNextHeader'
+	" - '[[': go to previous header. '<Plug>Markdown_MoveToPreviousHeader'
+	" - '][': go to next sibling header if any. '<Plug>Markdown_MoveToNextSiblingHeader'
+	" - '[]': go to previous sibling header if any. '<Plug>Markdown_MoveToPreviousSiblingHeader'
+	" - ']c': go to Current header. '<Plug>Markdown_MoveToCurHeader'
+	" - ']u': go to parent header (Up). '<Plug>Markdown_MoveToParentHeader'
 
-" Commands
-" - ':TableFormat': Format the table under the cursor
-" - ':Toc': create a quickfix vertical window navigable table of contents with the headers.
+	" Commands
+	" - ':TableFormat': Format the table under the cursor
+	" - ':Toc': create a quickfix vertical window navigable table of contents with the headers.
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-instant-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
+:if enable_vim_instant_markdown
+	let g:instant_markdown_slow = 1
+	let g:instant_markdown_autostart = 0
 
-" manually trigger preview via the command :InstantMarkdownPreview.
-" the command is only available inside markdown buffers and when the autostart option is turned off.
-map <Leader>md :InstantMarkdownPreview<CR>
+	" manually trigger preview via the command :InstantMarkdownPreview.
+	" the command is only available inside markdown buffers and when the autostart option is turned off.
+	map <Leader>md :InstantMarkdownPreview<CR>
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " miniBufExpl settings
@@ -914,17 +1166,81 @@ let g:miniBufExplModSelTarget =1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-json
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:vim_json_syntax_conceal = 0
+:if enable_vim_json
+	"let g:vim_json_syntax_conceal = 0
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-virtualenv
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:if enable_vim_virtualenv
 "TODO
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"TODO
+:if enable_python_mode
+	" Common functionality
+	" --------------------
+	let g:pymode_run = 0
+	let g:pymode_rope = 0
+	let g:pymode_folding = 0
+	let g:pymode_virtualenv = 0
+	let g:pymode_breakpoint = 0
+	let g:pymode_lint_signs = 0
+
+	let g:pymode_quickfix_minheight = 5
+	let g:pymode_quickfix_maxheight = 10
+
+	let g:pymode_options_colorcolumn = 1
+	let g:pymode_options_max_line_length = 99
+
+	"                                                       *pymode-python-version*
+	" By default pymode looks for current python version supported in your Vim.
+	" You could choose prefer version, but value will be tested on loading.
+	"
+	"let g:pymode_python = 'python'
+	"
+	" Values are `python`, `python3`, `disable`. If value set to `disable` most
+	" python-features of **pymode** will be disabled.
+	"
+	" Set value to `python3` if you are working with python3 projects.
+
+	"                                                               *pymode-motion*
+	" Support Vim motion for python objects (such as functions,
+	" class and methods).
+	"
+	" C — means class
+	" M — means method or function
+	"                                                          *pymode-motion-keys*
+	" ====  ============================
+	" Key   Command
+	" ====  ============================
+	" [[    Jump to previous class or function (normal, visual, operator modes)
+	" ]]    Jump to next class or function  (normal, visual, operator modes)
+	" [M    Jump to previous class or method (normal, visual, operator modes)
+	" ]M    Jump to next class or method (normal, visual, operator modes)
+	" aC    Select a class. Ex: vaC, daC, yaC, caC (normal, operator modes)
+	" iC    Select inner class. Ex: viC, diC, yiC, ciC (normal, operator modes)
+	" aM    Select a function or method. Ex: vaM, daM, yaM, caM (normal, operator modes)
+	" iM    Select inner function or method. Ex: viM, diM, yiM, ciM (normal, operator modes)
+	" ====  ============================
+
+	"                                                        *pymode-documentation*
+	" Pymode could show documentation for current word by pydoc.
+	"
+	" :PymodeDoc <args> — show documentation
+	"
+	" Bind keys to show documentation for current word (selection)
+	" let g:pymode_doc_bind = 'K'
+
+	" Default code checkers (you could set several)        *g:pymode_lint_checkers*
+	"
+	" let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+	"
+	" Values may be chosen from: `pylint`, `pep8`, `mccabe`, `pep257`, `pyflakes`.
+:endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-test
