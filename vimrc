@@ -290,6 +290,7 @@ set ruler
 
 " Show line number
 set number
+set relativenumber
 
 " display incomplete commands
 set showcmd
@@ -812,6 +813,8 @@ nmap <Leader>at :AT<cr>
 
 	let g:grepper.git =
 	  \ { 'grepprg': 'git -C `git rev-parse --show-toplevel` grep -nI' }
+	let g:grepper.ag =
+	  \ { 'grepprg': 'ag -i' }
 :endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
