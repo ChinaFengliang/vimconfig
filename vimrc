@@ -20,7 +20,6 @@ Plugin 'ShowMarks'
 " The select the a mark to jump to, use <CR> or <2-LeftMouse>
 " To delete a mark, press d
 Plugin 'Marks-Browser'
-
 Plugin 'tomasr/molokai'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mhinz/vim-grepper'
@@ -58,6 +57,8 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'Yggdroot/indentLine'
+"Plugin 'mbriggs/mark.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -358,7 +359,7 @@ nmap <Leader>ev :call SwitchToBuf("~/.vimrc")<CR>
 " Man page
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source $VIMRUNTIME/ftplugin/man.vim
-nmap <Leader>m :Man<Space>
+"nmap <Leader>m :Man<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
@@ -486,6 +487,14 @@ map / <Plug>(easymotion-sn)
 " different highlight method and have some other features )
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" indentLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_concealcursor = ''
+let g:indentLine_leadingSpaceChar = '·'
+"let g:indentLine_leadingSpaceEnabled = 1
+"let g:indentLine_fileType = ['python']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Nerdtree
