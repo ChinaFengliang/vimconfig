@@ -13,12 +13,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'ShowMarks'
-
-" To open the browser, use the :MarksBrowser command
-" The select the a mark to jump to, use <CR> or <2-LeftMouse>
-" To delete a mark, press d
 Plugin 'Marks-Browser'
 Plugin 'tomasr/molokai'
 Plugin 'kien/ctrlp.vim'
@@ -58,7 +53,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Yggdroot/indentLine'
-"Plugin 'mbriggs/mark.vim'
+Plugin 'mbriggs/mark.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -450,12 +445,23 @@ let showmarks_hlline_upper = 1
 nmap <Leader>mc :ShowMarksClearMark<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Markbrowser
+" Marks-Browser - mark line browser.
+" F4: open/close the mark browser.
+"     select a mark, press 'enter' to jump to it, press 'd' to delete it
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>mb :MarksBrowser<CR>
+nmap <F4> :MarksBrowser<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Easymotion
+" mbriggs/mark.vim - highlight several words in different colors simultaneously.
+" <Leader>m / F5: mark/unmark the word under (or before) the cursor.
+" <Leader>*: jump to next matched word.
+" <Leader>#: jump to prev matched word.
+" Mark: clear all marks.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <F5> :<C-u>call mark#MarkCurrentWord()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-easymotion - easy to move to anywhere
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
@@ -501,8 +507,6 @@ let g:indentLine_leadingSpaceChar = '·'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Global commands
 " :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
-nmap <Leader>n :NERDTree<Space>
-nmap <Leader>nt :NERDTreeToggle<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
@@ -789,7 +793,7 @@ let g:tmuxline_preset = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rust_fold = 1
 "let g:rustfmt_autosave = 1
-nmap <Leader>r :RustRun<CR>
+"nmap <Leader>r :RustRun<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-markdown
