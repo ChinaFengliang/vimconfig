@@ -191,9 +191,9 @@ set whichwrap+=<,>,h,l
 " Text, tab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " expand tab with spaces
-"set expandtab
+set expandtab
 
-" 1 tab == 4 spaces
+" replace 1 tab to 4 spaces
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -503,7 +503,7 @@ let g:indentLine_leadingSpaceChar = '·'
 " :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
 nmap <Leader>n :NERDTree<Space>
 nmap <Leader>nt :NERDTreeToggle<CR>
-nnoremap <F5> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 
@@ -580,7 +580,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 
 " Toggle tag list on and off
-nnoremap <F8> :TlistToggle<CR>
+nnoremap <F3> :TlistToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
