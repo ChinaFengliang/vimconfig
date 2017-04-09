@@ -313,6 +313,7 @@ set whichwrap+=<,>,h,l
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " expand tab with spaces
 "set expandtab
+set noexpandtab
 
 " 1 tab == 4 spaces
 set tabstop=4
@@ -851,7 +852,8 @@ nmap <Leader>at :AT<cr>
 " SuperTab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :if enable_supertab
-	let g:SuperTabDefaultCompletionType = '<C-TAB>'
+	let g:SuperTabDefaultCompletionType = 'context'
+	let g:SuperTabContextDefaultCompletionType = "<c-n>"
 :endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -867,8 +869,8 @@ nmap <Leader>at :AT<cr>
 	let g:ycm_collect_identifiers_from_tags_files = 1
 	"let g:ycm_key_invoke_completion = '<C-Space>' " Default
 	"let g:ycm_key_detailed_diagnostics = '<Leader>d' " Default
-	let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
-	let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
+	"let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+	"let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
 
 	let g:ycm_confirm_extra_conf=0
 	let g:ycm_global_ycm_extra_conf = '~/.vim/scripts/.ycm_extra_conf.py'
