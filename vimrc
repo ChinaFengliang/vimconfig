@@ -40,9 +40,14 @@ call vundle#begin()
 :let enable_vim_json = 0
 :let enable_vim_markdown = 0
 :let enable_vim_instant_markdown = 0
+:let enable_nerdcommenter = 1
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+:if enable_nerdcommenter
+	Plugin 'scrooloose/nerdcommenter'
+:endif
 
 :if enable_showmark
 	Plugin 'ShowMarks'
