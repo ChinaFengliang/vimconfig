@@ -852,8 +852,9 @@ nmap <Leader>at :AT<cr>
 " SuperTab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :if enable_supertab
-	let g:SuperTabDefaultCompletionType = 'context'
-	let g:SuperTabContextDefaultCompletionType = "<c-n>"
+	let g:SuperTabDefaultCompletionType = '<C-TAB>'
+	"let g:SuperTabDefaultCompletionType = 'context'
+	"let g:SuperTabContextDefaultCompletionType = "<c-n>"
 :endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
