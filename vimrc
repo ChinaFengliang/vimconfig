@@ -276,7 +276,7 @@ endif
 set conceallevel=2
 
 if has('gui_running')
-    set background=dark
+    set background=light
 else
     set background=dark
 endif
@@ -285,10 +285,10 @@ endif
 
 if &background == "light"
     let g:solarized_termcolors=256
-    colorscheme solarized
+    colorscheme solarized_my
 else
     let g:rehash256=1
-    colorscheme molokai
+    colorscheme molokai_my
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -339,8 +339,7 @@ set wrap "Wrap lines
 
 " Show tabs and trails
 if(g:iswindows!=1)
-set list listchars=tab:→·,trail:
-endif
+set list listchars=tab:→·,trail:·
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups
