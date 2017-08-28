@@ -199,6 +199,13 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if (has("win32") || has("win95") || has("win64") || has("win16"))
+    let g:iswindows=1
+else
+    let g:iswindows=0
+endif
+
 " Sets how many lines of history VIM has to remember
 set history=50
 
@@ -331,6 +338,7 @@ set lbr
 set wrap "Wrap lines
 
 " Show tabs and trails
+if(g:iswindows!=1)
 set list listchars=tab:→·,trail:·
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -344,7 +352,7 @@ set nobackup
 set autoread
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+set encoding=utf-8
 
 " Use Unix as the standard file type
 set fileformats=unix,dos,mac
@@ -1258,6 +1266,24 @@ let g:miniBufExplModSelTarget =1
 	"
 	" Values may be chosen from: `pylint`, `pep8`, `mccabe`, `pep257`, `pyflakes`.
 :endif
+
+"  Gvim中文菜单乱码解决方案
+
+" 设置文件编码格式
+set encoding=utf-8
+set fileencodings=utf-8,chinese,latin-1,gbk,gb18030,gk2312
+if has("win32")
+ set fileencoding=chinese
+else
+ set fileencoding=utf-8
+endif
+
+"解决菜单乱码
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+"解决consle提示信息输出乱码
+language messages zh_CN.utf-8
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-test
