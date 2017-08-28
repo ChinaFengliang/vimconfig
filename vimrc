@@ -454,6 +454,12 @@ nmap <Leader>p :setlocal paste!<CR>
 map <F6> :bo cw<CR>
 map <C-c> :cclose<CR>
 
+" window resizing
+nmap    w-  :vertical resize -3<CR>
+nmap    w=  :vertical resize +3<CR>
+nmap    w,  :resize +3<CR>
+nmap    w.  :resize -3<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast edit vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
