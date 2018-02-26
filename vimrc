@@ -30,7 +30,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/syntastic'
 Plugin 'rdnetto/YCM-Generator'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'vim-airline/vim-airline'
@@ -320,6 +320,8 @@ nmap <Leader>vs :vsplit<CR>
 " Toggle paste mode on and off
 nmap <Leader>p :setlocal paste!<CR>
 
+" Delete tail space(s)
+nmap <Leader>ds :%s/\s\+$//<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast edit vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -443,10 +445,10 @@ let showmarks_ignore_type = "hqm"
 let showmarks_hlline_lower = 1
 let showmarks_hlline_upper = 1
 
-"The following mappings are setup by default:
-"  <Leader>mt   - Toggles ShowMarks on and off.
-"  <Leader>ma   - Clears all marks in the current buffer.
-"  <Leader>mm   - Places the next available mark on the current lineo
+" The following mappings are setup by default:
+" <Leader>mt - Enable ShowMarks on/off.
+" <Leader>ma - Clears all marks in the current buffer.
+" <Leader>mm - Auto-assign a letter for marking the current line
 nmap <Leader>mc :ShowMarksClearMark<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -839,7 +841,7 @@ let g:vim_markdown_json_frontmatter = 1
 " vim-instant-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
+let g:instant_markdown_autostart = 1
 
 " manually trigger preview via the command :InstantMarkdownPreview.
 " the command is only available inside markdown buffers and when the autostart option is turned off.
