@@ -338,9 +338,9 @@ set lbr
 set wrap "Wrap lines
 
 " Show tabs and trails
-if(g:iswindows!=1)
-set list listchars=tab:→·,trail:·
-endif
+"if(g:iswindows!=1)
+"set list listchars=tab:→·,trail:·
+"endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups
@@ -1284,7 +1284,9 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 "解决consle提示信息输出乱码
-language messages zh_CN.utf-8
+if has("win32")
+  language messages zh_CN.UTF-8
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-test
