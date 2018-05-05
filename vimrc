@@ -246,8 +246,8 @@ set diffopt=vertical,context:3
 
 " With a map leader it's possible to do extra key combinations
 " like <Leader>w saves the current file
-let mapleader = ";"
-let g:mapleader = ";"
+let mapleader = ","
+let g:mapleader = ","
 
 " No Menubar
 set go=
@@ -288,7 +288,7 @@ if &background == "light"
     colorscheme solarized_my
 else
     let g:rehash256=1
-    colorscheme molokai
+    colorscheme molokai_fengliang
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -302,7 +302,6 @@ set ruler
 
 " Show line number
 set number
-set relativenumber
 
 " display incomplete commands
 set showcmd
@@ -468,6 +467,9 @@ nmap    w-  :vertical resize -3<CR>
 nmap    w=  :vertical resize +3<CR>
 nmap    w,  :resize +3<CR>
 nmap    w.  :resize -3<CR>
+
+" Delete tail space(s)
+nmap <Leader>ds :%s/\s\+$//<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast edit vimrc
@@ -734,7 +736,7 @@ nmap <Leader>at :AT<cr>
 	" Global commands
 	" :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
 	"nmap <Leader>n :NERDTree<Space>
-	nmap <Leader>nt :NERDTreeToggle<CR>
+	nmap <Leader>h :NERDTreeToggle<CR>
 	nmap <Leader>e :NERDTreeToggle<CR>
 	let NERDTreeHighlightCursorline=1
 	let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
@@ -845,7 +847,7 @@ nmap <Leader>at :AT<cr>
 	let Tlist_Show_One_File = 1
 	let Tlist_Exit_OnlyWindow = 1
 	let Tlist_Use_Right_Window = 1
-	let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+	let Tlist_Ctags_Cmd = 'ctags'
 
 	" Toggle tag list on and off
 	nmap <Leader>l :TlistToggle<CR>
