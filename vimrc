@@ -14,7 +14,7 @@ call vundle#begin()
 :let enable_showmark = 0
 :let enable_marks_browser = 0
 :let enable_molokai = 1
-:let enable_ctrlp = 0
+:let enable_ctrlp = 1
 :let enable_taglist = 1
 :let enable_nerdtree = 1
 :let enable_vim_grepper = 1
@@ -25,7 +25,7 @@ call vundle#begin()
 :let enable_ultisnips = 0
 :let enable_vim_snippets = 0
 :let enable_syntastic = 0
-:let enable_ycm = 1
+:let enable_ycm = 0
 :let enable_vim_easymotion = 1
 :let enable_indent_line = 1
 :let enable_python_mode = 0
@@ -41,6 +41,14 @@ call vundle#begin()
 :let enable_vim_markdown = 0
 :let enable_vim_instant_markdown = 0
 :let enable_nerdcommenter = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins declaration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" plugin from www.github.com
+"     format: Plugin 'author/repository'
+" plugin from www.vim.org/scripts
+"     format: Plugin 'project'
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -322,14 +330,16 @@ set whichwrap+=<,>,h,l
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, tab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" expand tab with spaces
-"set expandtab
-set noexpandtab
-
 " 1 tab == 4 spaces
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+
+" expand tab with spaces
+set noexpandtab
+
+" replace tab in .c/.cpp/.h files
+autocmd FileType c,cpp,h set expandtab
 
 " Linebreak on 500 characters
 set lbr
@@ -468,9 +478,6 @@ nmap    w=  :vertical resize +3<CR>
 nmap    w,  :resize +3<CR>
 nmap    w.  :resize -3<CR>
 
-" Delete tail space(s)
-nmap <Leader>ds :%s/\s\+$//<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast edit vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -510,7 +517,7 @@ nmap <Leader>ev :call SwitchToBuf("~/.vimrc")<CR>
 " Man page
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source $VIMRUNTIME/ftplugin/man.vim
-nmap <Leader>m :Man<Space>
+" nmap <Leader>m :Man<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
@@ -682,6 +689,11 @@ nmap <Leader>at :AT<cr>
 :if enable_marks_browser
 	nmap <Leader>mb :MarksBrowser<CR>
 :endif
+
+" create local mark
+" ma
+" create global mark
+" mA
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Easymotion
@@ -945,6 +957,10 @@ nmap <Leader>at :AT<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Trailing whitespace
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" The trailing spaces/tabs in the following file types are not highlighted
+let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'h', 'hpp', 'c', 'cpp', 'py']
+
+" Quickly delete trailing space
 map <Leader><space> :FixWhitespace<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1294,3 +1310,18 @@ endif
 " vim-test
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <Leader>d <C-]>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" scrooloose/nerdcommenter'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:if enable_nerdcommenter
+	" a space after the left delimiter and before the right delimiter.
+	let g:NERDSpaceDelims=1
+
+	" Comment out the current line or text selected in visual mode.
+	" <Leader>cc
+	" Comments the given lines using only one set of multipart delimiters.
+	" <Leader>cm
+	" Uncomments the selected line(s).
+	" <Leader>cu
+:endif
