@@ -344,7 +344,7 @@ autocmd FileType c,cpp,h set expandtab
 " Linebreak on 500 characters
 set lbr
 "set tw=500
-set wrap "Wrap lines
+set nowrap "no wrap lines
 
 " Show tabs and trails
 "if(g:iswindows!=1)
