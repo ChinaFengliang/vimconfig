@@ -1,0 +1,2 @@
+# Enable user's colorscheme
+cp molokai_fengliang.vim /usr/share/vim/vim80/colors/

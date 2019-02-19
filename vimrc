@@ -38,8 +38,8 @@ call vundle#begin()
 :let enable_rust = 0
 :let enable_vim_toml = 0
 :let enable_vim_json = 0
-:let enable_vim_markdown = 0
-:let enable_vim_instant_markdown = 0
+:let enable_vim_markdown = 1
+:let enable_vim_instant_markdown = 1
 :let enable_nerdcommenter = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -749,7 +749,6 @@ nmap <Leader>at :AT<cr>
 	" :NERDTree [<start-directory> | <bookmark>], help :NERDTree to see more detail
 	"nmap <Leader>n :NERDTree<Space>
 	nmap <Leader>h :NERDTreeToggle<CR>
-	nmap <Leader>e :NERDTreeToggle<CR>
 	let NERDTreeHighlightCursorline=1
 	let NERDTreeIgnore=[ '\~$', '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 :endif
@@ -775,8 +774,11 @@ nmap <Leader>at :AT<cr>
 	" :CtrlPBuffer Open CtrlP in find buffer mode
 	" :CtrlPMRU Open CtrlP in find Most-Recently-Used file mode
 
-	let g:ctrlp_map = '<Leader>ff' " the mapping to invoke CtrlP in Normal mode, default is '<C-P>'
-	"let g:ctrlp_cmd = 'CtrlP' " the default opening command to use when pressing the above mapping
+	" the mapping to invoke CtrlP in Normal mode, default is '<C-P>'
+	let g:ctrlp_map = '<Leader>ff'
+
+	" the default opening command to use when pressing the above mapping
+	"let g:ctrlp_cmd = 'CtrlP'
 
 	nmap <Leader>fb :CtrlPBuffer<CR>
 	nmap <Leader>fr :CtrlPMRU<CR>
@@ -1192,7 +1194,7 @@ let g:tmuxline_preset = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :if enable_vim_instant_markdown
 	let g:instant_markdown_slow = 1
-	let g:instant_markdown_autostart = 0
+	let g:instant_markdown_autostart = 1
 
 	" manually trigger preview via the command :InstantMarkdownPreview.
 	" the command is only available inside markdown buffers and when the autostart option is turned off.
