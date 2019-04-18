@@ -41,20 +41,47 @@ after powerline fonts installed, configure the terminal to use one of the powerl
 $ sudo apt-get install xdg-utils curl nodejs-legacy npm
 $ sudo npm -g install instant-markdown-d
 ```
-## 编译vim  
-./configure --with-features=huge \
+## 源码编译
+```
+$ git clone https://github.com/vim/vim.git
+```
+### 配置
+在vim的help文档中, 提到`当同时支持Python 2和Python 3时，必须动态加载它们。在
+Linux / Unix系统上执行此操作并导入global symbols时，这会导致使用第二个Python版本
+时发生崩溃。 所以要么加载global symbols只激活一个Python版本，要么不导入全局符号。
+这会导致Python导入vim提供的全局符号的相关库的import出错。` 因此，我们仅编译支持
+python 2 或 python 3功能。
+
+支持Python 2配置如下：
+```
+$ ./configure --with-features=huge \
             --enable-multibyte \
             --enable-rubyinterp=yes \
             --enable-pythoninterp=yes \
             --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
+            --enable-perlinterp=yes \
+            --enable-luainterp=yes \
+            --enable-cscope \
+            --prefix=/usr/local
+```
+支持Python 3配置如下：
+```
+$ ./configure --with-features=huge \
+            --enable-multibyte \
+            --enable-rubyinterp=yes \
             --enable-python3interp=yes \
             --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu \
             --enable-perlinterp=yes \
             --enable-luainterp=yes \
             --enable-cscope \
             --prefix=/usr/local
-make VIMRUNTIMEDIR=/usr/local/share/vim/vim81
-make install
+```
+
+### 安装
+```
+$ make VIMRUNTIMEDIR=/usr/local/share/vim/vim81
+$ make install
+```
 
 ## References
 

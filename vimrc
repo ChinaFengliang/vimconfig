@@ -25,7 +25,7 @@ call vundle#begin()
 :let enable_ultisnips = 0
 :let enable_vim_snippets = 0
 :let enable_syntastic = 0
-:let enable_ycm = 0
+:let enable_ycm = 1
 :let enable_vim_easymotion = 1
 :let enable_indent_line = 1
 :let enable_python_mode = 0
