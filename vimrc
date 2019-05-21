@@ -177,6 +177,7 @@ Plugin 'klen/python-mode'
 
 :if enable_vim_markdown
 	Plugin 'plasticboy/vim-markdown'
+	Plugin 'mzlogin/vim-markdown-toc'
 :endif
 
 :if enable_vim_instant_markdown
@@ -1187,6 +1188,15 @@ let g:tmuxline_preset = {
 	" Commands
 	" - ':TableFormat': Format the table under the cursor
 	" - ':Toc': create a quickfix vertical window navigable table of contents with the headers.
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	" mzlogin/vim-markdown-toc
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	" :GenTocGFM - create toc
+	" :UpdateToc - update toc
+	let g:vmt_auto_update_on_save = 1
+	let g:vmt_dont_insert_fence = 0
 :endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
