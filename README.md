@@ -1,5 +1,20 @@
 My vim configuration
 
+<!-- vim-markdown-toc GFM -->
+
+* [Install Vim:](#install-vim)
+* [Install configuration](#install-configuration)
+* [Install Vundle plugin manager](#install-vundle-plugin-manager)
+* [Install other plugins](#install-other-plugins)
+* [Install powerline fonts](#install-powerline-fonts)
+* [Install dependencies for `suan/vim-instant-markdown`](#install-dependencies-for-suanvim-instant-markdown)
+* [源码编译](#源码编译)
+    * [配置](#配置)
+    * [安装](#安装)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 ## Install Vim:
 
 ```bash
