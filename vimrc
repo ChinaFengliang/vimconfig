@@ -25,7 +25,7 @@ call vundle#begin()
 :let enable_ultisnips = 0
 :let enable_vim_snippets = 0
 :let enable_syntastic = 0
-:let enable_ycm = 1
+:let enable_ycm = 0
 :let enable_vim_easymotion = 1
 :let enable_indent_line = 1
 :let enable_python_mode = 0
@@ -862,6 +862,7 @@ nmap <Leader>at :AT<cr>
 	let Tlist_Show_One_File = 1
 	let Tlist_Exit_OnlyWindow = 1
 	let Tlist_Use_Right_Window = 1
+	let Tlist_GainFocus_On_ToggleOpen = 1
 	let Tlist_Ctags_Cmd = 'ctags'
 
 	" Toggle tag list on and off
