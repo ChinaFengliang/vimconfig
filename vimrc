@@ -25,7 +25,7 @@ call vundle#begin()
 :let enable_ultisnips = 0
 :let enable_vim_snippets = 0
 :let enable_syntastic = 0
-:let enable_ycm = 0
+:let enable_ycm = 1
 :let enable_vim_easymotion = 1
 :let enable_indent_line = 1
 :let enable_python_mode = 0
@@ -469,10 +469,6 @@ nmap <Leader>vs :vsplit<CR>
 " Toggle paste mode on and off
 nmap <Leader>p :setlocal paste!<CR>
 
-" open quickfix window
-map <F6> :bo cw<CR>
-map <C-c> :cclose<CR>
-
 " window resizing
 nmap    w-  :vertical resize -3<CR>
 nmap    w=  :vertical resize +3<CR>
@@ -539,19 +535,19 @@ if has("cscope")
   set csverb
 endif
 
-" 0 or s: Find this C symbol
+" 0 or s: 查找 C 语言符号（函数名、宏、枚举值）
 nmap <Leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
-" 1 or g: Find this definition
+" 1 or g: 查找符号（函数、宏、枚举等）的定义
 nmap <Leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
-" 2 or d: Find functions called by this function
+" 2 or d: 查找本函数调用了哪些函数
 nmap <Leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
-" 3 or c: Find functions calling this function
+" 3 or c: 查找哪个函数调用了本函数
 nmap <Leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
-" 4 or t: Find this text string
+" 4 or t: 查找这个字符串
 nmap <Leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
-" 6 or e: Find this egrep pattern
+" 6 or e: 查找这个 egrep 匹配模式
 nmap <Leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
-" 7 or f: Find this file
+" 7 or f: 查找这个文件
 "nmap <Leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
 " 8 or i: Find files #including this file
 nmap <Leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
@@ -647,6 +643,11 @@ nmap <Leader>cq :cclose<CR>
 nmap <Leader>co :colder<CR>
 " Go to newer error list
 nmap <Leader>ca :cnewer<CR>
+
+" 打开 quickfix 窗口
+map <F6> :bo cw<CR>
+" 关闭 quickfix 窗口
+map <C-c> :cclose<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Alternate Files quickly (a.vim)
@@ -1142,7 +1143,7 @@ let g:tmuxline_preset = {
     \'a'       : '#S',
     \'win'     : '#I #W',
     \'cwin'    : '#I #W',
-    \'y'       : ['%a', '%Y/%m/%d %R', 'load average: #(cat /proc/loadavg | cut -d " " -f1-3)'],
+    \'y'       : ['%Y/%m/%d %R'],
     \'z'       : '#(whoami)@#H',
     \'options' : {'status-justify' : 'left'}}
 
