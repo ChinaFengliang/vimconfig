@@ -44,7 +44,8 @@ $ git clone https://github.com/powerline/fonts.git
 $ cd fonts && ./install.sh
 ```
 after powerline fonts installed, configure the terminal to use one of the
-powerline fonts.
+powerline fonts. 作者认为*Source Code Pro for Powerline Medium*的12号字体
+比较舒服。
 
 ## suan/vim-instant-markdown
 ```bash
