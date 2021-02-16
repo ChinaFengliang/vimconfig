@@ -11,8 +11,9 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-:let enable_showmark = 0
-:let enable_marks_browser = 0
+:let enable_showmark = 1
+:let enable_marks_browser = 1
+:let enable_mark = 1
 :let enable_molokai = 1
 :let enable_ctrlp = 1
 :let enable_taglist = 1
@@ -59,6 +60,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 :if enable_showmark
 	Plugin 'ShowMarks'
+:endif
+
+:if enable_mark
+	Plugin 'mbriggs/mark.vim'
 :endif
 
 :if enable_marks_browser
@@ -697,6 +702,17 @@ nmap <Leader>at :AT<cr>
 " mA
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" mbriggs/mark.vim - highlight several words in different colors simultaneously.
+" <Leader>m / F5: mark/unmark the word under (or before) the cursor.
+" <Leader>*: jump to next matched word.
+" <Leader>#: jump to prev matched word.
+" Mark: clear all marks.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:if enable_mark
+	nmap <F5> :<C-u>call mark#MarkCurrentWord()<CR>
+:endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :if enable_vim_easymotion
@@ -1142,8 +1158,7 @@ let g:tmuxline_preset = {
     \'a'       : '#S',
     \'win'     : '#I #W',
     \'cwin'    : '#I #W',
-    \'y'       : ['%a', '%Y/%m/%d %R', 'load average: #(cat /proc/loadavg | cut -d " " -f1-3)'],
-    \'z'       : '#(whoami)@#H',
+	\'y'       : ['%Y/%m/%d %R'],
     \'options' : {'status-justify' : 'left'}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
